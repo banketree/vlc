@@ -119,8 +119,6 @@ static int Open(vlc_object_t * p_this)
     filter_t *p_filter = (filter_t *)p_this;
     filter_sys_t *p_sys;
 
-    msg_Err(p_filter, "glspectrum open");
-
     p_sys = p_filter->p_sys = (filter_sys_t*)malloc(sizeof(*p_sys));
     if (p_sys == NULL)
         return VLC_ENOMEM;

@@ -298,7 +298,7 @@ static int VisualizationCallback (vlc_object_t *obj, const char *var,
      * The visual plugin should have one submodule per effect instead. */
     if (strcasecmp (mode, "none") && strcasecmp (mode, "goom")
      && strcasecmp (mode, "projectm") && strcasecmp (mode, "vsxu")
-     && strcasecmp (mode, "glspectrum"))
+     && strcasecmp (mode, "glspectrum") && strcasecmp (mode, "glloudness"))
     {
         var_Create (obj, "effect-list", VLC_VAR_STRING);
         var_SetString (obj, "effect-list", mode);
@@ -465,7 +465,6 @@ aout_filters_t *aout_FiltersNew (vlc_object_t *obj,
 
     if (request_vout != NULL)
     {
-        msg_Err(obj, "aout_FiltersNew request_vout != NULL");
         char *visual = var_InheritString (obj, "audio-visual");
         if (visual != NULL && strcasecmp (visual, "none"))
             AppendFilter(obj, "visualization", visual, filters,
