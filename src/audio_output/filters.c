@@ -47,6 +47,7 @@ static filter_t *CreateFilter (vlc_object_t *obj, const char *type,
                                const audio_sample_format_t *infmt,
                                const audio_sample_format_t *outfmt)
 {
+    msg_Err(obj, "CreateFilter -name %s", name);
     filter_t *filter = vlc_custom_create (obj, sizeof (*filter), type);
     if (unlikely(filter == NULL))
         return NULL;
@@ -355,6 +356,7 @@ static int AppendFilter(vlc_object_t *obj, const char *type, const char *name,
         return -1;
     }
 
+    msg_Err( obj, "filter type[%s], name[%s]", type, name);
     filter_t *filter = CreateFilter (obj, type, name,
                                      (void *)owner, infmt, outfmt);
     if (filter == NULL)
@@ -463,6 +465,7 @@ aout_filters_t *aout_FiltersNew (vlc_object_t *obj,
 
     if (request_vout != NULL)
     {
+        msg_Err(obj, "aout_FiltersNew request_vout != NULL");
         char *visual = var_InheritString (obj, "audio-visual");
         if (visual != NULL && strcasecmp (visual, "none"))
             AppendFilter(obj, "visualization", visual, filters,

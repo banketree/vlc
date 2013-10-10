@@ -651,7 +651,7 @@ AC_CHECK_FUNC(getopt_long,, [
 AC_SUBST(GNUGETOPT_LIBS)
 
 AC_CHECK_LIB(m,cos,[
-  VLC_ADD_LIBS([adjust wave ripple psychedelic gradient a52tofloat32 dtstofloat32 x264 goom noise grain scene chorus_flanger freetype swscale postproc equalizer spatializer param_eq samplerate freetype mpc qt4 compressor headphone_channel_mixer normvol audiobargraph_a audiobargraph_v mono colorthres extract ball hotkeys mosaic gaussianblur x262 x26410b hqdn3d anaglyph oldrc ncurses oldmovie glspectrum],[-lm])
+  VLC_ADD_LIBS([adjust wave ripple psychedelic gradient a52tofloat32 dtstofloat32 x264 goom noise grain scene chorus_flanger freetype swscale postproc equalizer spatializer param_eq samplerate freetype mpc qt4 compressor headphone_channel_mixer normvol audiobargraph_a audiobargraph_v mono colorthres extract ball hotkeys mosaic gaussianblur x262 x26410b hqdn3d anaglyph oldrc ncurses oldmovie glspectrum glloudness],[-lm])
   LIBM="-lm"
 ], [
   LIBM=""
@@ -3952,6 +3952,17 @@ if test "${enable_glspectrum}" != "no" && test "${have_gl}" = "yes"
 then
     VLC_ADD_PLUGIN([glspectrum])
     VLC_ADD_LIBS([glspectrum],[$GL_LIBS])
+fi
+
+dnl
+dnl  glLoudness
+dnl
+AC_ARG_ENABLE(glloudness,
+  [  --enable-glloudness    3D OpenGL loudness visualization (default auto)])
+if test "${enable_glloudness}" != "no" && test "${have_gl}" = "yes"
+then
+    VLC_ADD_PLUGIN([glloudness])
+    VLC_ADD_LIBS([glloudness],[$GL_LIBS])
 fi
 
 EXTEND_HELP_STRING([Service Discovery plugins:])

@@ -259,6 +259,13 @@ audio_output_t *aout_New (vlc_object_t *parent)
         text.psz_string = (char*)"3D spectrum";
         var_Change (aout, "visual", VLC_VAR_ADDCHOICE, &val, &text);
     }
+    /* Look for glloudness plugin */
+    if (module_exists ("glloudness"))
+    {
+        val.psz_string = (char *)"glloudness";
+        text.psz_string = (char*)"3D Loudness";
+        var_Change (aout, "visual", VLC_VAR_ADDCHOICE, &val, &text);
+    }
     str = var_GetNonEmptyString (aout, "effect-list");
     if (str != NULL)
     {

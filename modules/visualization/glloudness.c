@@ -1,9 +1,9 @@
 /*****************************************************************************
- * glspectrum.c: spectrum visualization module based on OpenGL
+ * glloudness.c: loudness visualization module based on OpenGL
  *****************************************************************************
  * Copyright © 2009-2013 VLC authors and VideoLAN
  *
- * Authors: Adrien Maglo <magsoft@videolan.org>
+ * Authors: Richard Kelsey
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -55,16 +55,16 @@ static void Close(vlc_object_t *);
 #define HEIGHT_LONGTEXT N_("The height of the visualization window, in pixels.")
 
 vlc_module_begin()
-    set_shortname(N_("glSpectrum"))
-    set_description(N_("3D OpenGL spectrum visualization"))
+    set_shortname(N_("glloudness"))
+    set_description(N_("3D OpenGL loudness visualization"))
     set_capability("visualization", 0)
     set_category(CAT_AUDIO)
     set_subcategory(SUBCAT_AUDIO_VISUAL)
 
-    add_integer("glspectrum-width", 400, WIDTH_TEXT, WIDTH_LONGTEXT, false)
-    add_integer("glspectrum-height", 300, HEIGHT_TEXT, HEIGHT_LONGTEXT, false)
+    add_integer("glloudness-width", 400, WIDTH_TEXT, WIDTH_LONGTEXT, false)
+    add_integer("glloudness-height", 300, HEIGHT_TEXT, HEIGHT_LONGTEXT, false)
 
-    add_shortcut("glspectrum")
+    add_shortcut("glloudness")
     set_callbacks(Open, Close)
 vlc_module_end()
 
@@ -119,7 +119,7 @@ static int Open(vlc_object_t * p_this)
     filter_t *p_filter = (filter_t *)p_this;
     filter_sys_t *p_sys;
 
-    msg_Err(p_filter, "glspectrum open");
+    msg_Err(p_filter, "glloudness open");
 
     p_sys = p_filter->p_sys = (filter_sys_t*)malloc(sizeof(*p_sys));
     if (p_sys == NULL)
@@ -128,8 +128,8 @@ static int Open(vlc_object_t * p_this)
     /* Create the object for the thread */
     vlc_sem_init(&p_sys->ready, 0);
     p_sys->b_error = false;
-    p_sys->i_width = var_InheritInteger(p_filter, "glspectrum-width");
-    p_sys->i_height = var_InheritInteger(p_filter, "glspectrum-height");
+    p_sys->i_width = var_InheritInteger(p_filter, "glloudness-width");
+    p_sys->i_height = var_InheritInteger(p_filter, "glloudness-height");
     p_sys->i_channels = aout_FormatNbChannels(&p_filter->fmt_in.audio);
     p_sys->p_prev_s16_buff = NULL;
 
