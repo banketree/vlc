@@ -178,8 +178,6 @@ static int Open( vlc_object_t *p_this )
     filter_t     *p_filter = (filter_t *)p_this;
     filter_sys_t *p_sys;
 
-    msg_Err(p_filter, "visual.c/open");
-
     char *psz_effects, *psz_parser;
 
     p_sys = p_filter->p_sys = malloc( sizeof( filter_sys_t ) );
